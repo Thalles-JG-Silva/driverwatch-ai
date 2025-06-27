@@ -47,18 +47,18 @@ Monitorar o rosto do motorista em tempo real utilizando visão computacional e a
 
 2. **Instale as dependências:**
 ---
-1.Navegue até a pasta do projeto que contém o script principa
+Navegue até a pasta do projeto que contém o script principa
 
 ```
 cd C: Pasta do projeto que contém o script principal
 ```
-2. Ative o ambiente virtual
+Ative o ambiente virtual
 ```
 ..\driverwatch-env\Scripts\activate
 ```
 -  **O prompt deve exibir `(driverwatch-env)` indicando que o ambiente está ativo.**
 ---
-3. Instale o pacote pré-compilado do dlib para evitar erros de compilação:
+Instale o pacote pré-compilado do dlib para evitar erros de compilação:
 ```
 pip install dlib-bin
 ```
@@ -66,7 +66,7 @@ Instale as demais bibliotecas necessárias:
 ```
 pip install scipy opencv-python numpy playsound
 ```
-4. Execute o script
+Execute o script
 ```
 python driverwatch_ai.py
 ```
