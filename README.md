@@ -57,7 +57,6 @@ Ative o ambiente virtual
 ..\driverwatch-env\Scripts\activate
 ```
 -  **O prompt deve exibir `(driverwatch-env)` indicando que o ambiente está ativo.**
----
 Instale o pacote pré-compilado do dlib para evitar erros de compilação:
 ```
 pip install dlib-bin
