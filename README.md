@@ -56,7 +56,7 @@ cd C: Pasta do projeto que contém o script principal
 ```
 ..\driverwatch-env\Scripts\activate
 ```
-O prompt deve exibir `(driverwatch-env)` indicando que o ambiente está ativo.
+ **O prompt deve exibir `(driverwatch-env)` indicando que o ambiente está ativo.**
 ---
 3. Instale o pacote pré-compilado do dlib para evitar erros de compilação:
 ```
