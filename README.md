@@ -71,6 +71,6 @@ Execute o script
 python driverwatch_ai.py
 ```
 ---
-## 🎯 Resultados obtidos
+## ✅ Resultados obtidos
 
 
