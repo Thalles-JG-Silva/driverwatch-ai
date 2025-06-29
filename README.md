@@ -1,72 +1,66 @@
-# 🚗 DriverWatch-AI
+# 🚗👁️🧠 DriverWatch-AI
 
 ## 🎯 Objetivo do Projeto
 
-Detectar sinais de sonolência em motoristas em tempo real por meio de visão computacional, emitindo alertas sonoros que ajudam a prevenir acidentes causados por fadiga ao volante.
+Monitorar, em tempo real, sinais de sonolência do motorista utilizando visão computacional. O sistema emite alertas sonoros progressivos ao detectar olhos fechados por períodos prolongados, ajudando a prevenir acidentes.
 
 ---
 
 ## 🛠 Tecnologias e Ferramentas Utilizadas
 
-* **Linguagem:** Python 3.10
-
-* **Bibliotecas:**
-
-  * OpenCV – captura e processamento de vídeo
-  * Dlib – detecção facial e pontos faciais
-  * NumPy e SciPy – cálculos matemáticos
-  * Pygame – reprodução de áudio
-
-* **Modelo pré-treinado incluso:**
-
-  * `shape_predictor_68_face_landmarks.dat`
+- Python 3.10
+- OpenCV (cv2)
+- dlib
+- NumPy
+- SciPy
+- Pygame
 
 ---
 
 ## ⚙️ Descrição do Funcionamento
 
-1. O sistema utiliza a webcam para monitorar continuamente o rosto do motorista.
-2. Detecta os olhos com base nos pontos faciais definidos pelo modelo.
-3. Calcula a **razão de aspecto ocular (EAR)** para identificar se os olhos estão fechados.
-4. A lógica de alerta segue os seguintes critérios:
-
-   * **Olhos fechados por curto tempo:** emite **alerta leve** (`alerta1.wav`).
-   * **Olhos fechados por tempo prolongado:** emite **alarme forte** (`alerta2.wav`).
-5. Quando os olhos são reabertos, o contador é resetado.
+1. O sistema usa a webcam para capturar o rosto do motorista em tempo real.
+2. A biblioteca `dlib` identifica os olhos com base no modelo `shape_predictor_68_face_landmarks.dat`.
+3. A razão de aspecto dos olhos (EAR) é calculada para verificar se estão fechados.
+4. Dois níveis de alerta sonoro são acionados:
+   - **Alerta leve**: olhos fechados por um curto período.
+   - **Alarme forte**: olhos fechados por um tempo prolongado.
+5. Os sons são tocados usando `pygame` sem travar a interface.
 
 ---
 
 ## ▶️ Como Executar/Testar o Projeto
 
-### ✅ Pré-requisitos
+### Pré-requisitos
 
-* Python 3.10 instalado
-* Sistema operacional: **Windows** (ambiente testado)
-* Ambiente virtual (venv) configurado com as dependências
-* O arquivo `shape_predictor_68_face_landmarks.dat` já está incluído na pasta do projeto
-
-### 📦 Passos para execução
-
-1. **Abra o terminal e ative o ambiente virtual:**
+- Python 3.10 instalado
+- Webcam funcional
+- As bibliotecas abaixo instaladas:
 
 ```bash
-cd caminho/para/o/projeto
-.\driverwatch-env\Scripts\activate
+pip install opencv-python dlib scipy numpy pygame
 ```
 
-2. **Instale as bibliotecas necessárias:**
+### Passo a Passo
 
-```bash
-pip install dlib-bin
-pip install scipy opencv-python numpy pygame
-```
+1. Clone o repositório ou baixe os arquivos.
+2. Certifique-se de que os seguintes arquivos estejam na pasta raiz do projeto:
+   - `driverwatch_ai.py`
+   - `alerta1.wav` (alerta sonoro leve)
+   - `alerta2.wav` (alarme sonoro forte)
+   - `shape_predictor_68_face_landmarks.dat` (modelo de pontos faciais)
 
-3. **Execute o script principal:**
+3. Execute o script:
 
 ```bash
 python driverwatch_ai.py
 ```
----
-## ✅ Resultados obtidos
 
-4. A janela com o vídeo será exibida. Pressione **'q'** para sair.
+4. Uma janela será aberta com a imagem da webcam.
+   - Pressione `q` para sair.
+
+---
+
+## 📝 Observações
+
+- O sistema é apenas uma demonstração e não substitui ferramentas profissionais de segurança veicular.
