@@ -58,7 +58,6 @@ python driverwatch_ai.py
 
 4. Uma janela será aberta com a imagem da webcam.
    - Pressione `q` para sair.
-
 ---
 
 ### Resultado
