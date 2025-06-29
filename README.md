@@ -63,8 +63,7 @@ python driverwatch_ai.py
 
 ### Resultado
 
-O vídeo abaixo demonstra os diferentes níveis de alerta emitidos ao motorista. 
-A altura e o ritmo do alarme aumentam gradualmente conforme o tempo em que o motorista permanece com os olhos fechados
+O vídeo gerado demonstra o funcionamento do sistema de detecção de sonolência em tempo real, utilizando visão computacional. Nele, é possível observar a análise contínua do rosto do motorista por meio da câmera, com destaque para os olhos. Quando o motorista mantém os olhos fechados por alguns segundos, o sistema identifica a diminuição da razão de aspecto ocular (EAR) e exibe um alerta visual na tela acompanhado de um aviso sonoro leve. Caso o tempo com os olhos fechados se prolongue além de um limite crítico, o sistema muda o estado para “alarme” e emite um aviso visual mais intenso, juntamente com um alarme sonoro forte.
 
 ---
 ## 📝 Observações
