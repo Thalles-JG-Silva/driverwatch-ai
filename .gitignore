@@ -1,10 +1,6 @@
 # Ignora o ambiente virtual
 driverwatch-env/
 
-# Ignora arquivos de áudio e modelo pesado
-*.wav
-*.dat
-
 # Ignora arquivos temporários do Python
 __pycache__/
 *.pyc
