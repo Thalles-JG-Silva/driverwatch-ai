@@ -3,26 +3,30 @@ import dlib
 import time
 import numpy as np
 from scipy.spatial import distance
-import playsound
+import pygame
 import threading
+
+# Inicializa o mixer de som do pygame
+pygame.mixer.init()
 
 # Função para tocar o som em paralelo
 def play_sound(path):
-    threading.Thread(target=playsound.playsound, args=(path,), daemon=True).start()
+    def _play():
+        pygame.mixer.music.load(path)
+        pygame.mixer.music.play()
+    threading.Thread(target=_play, daemon=True).start()
 
 # Função para calcular a razão de aspecto dos olhos
 def eye_aspect_ratio(eye):
-    # Calcula as distâncias verticais e horizontais entre os pontos dos olhos
     A = distance.euclidean(eye[1], eye[5])
     B = distance.euclidean(eye[2], eye[4])
     C = distance.euclidean(eye[0], eye[3])
-    # Fórmula do EAR (Eye Aspect Ratio)
     ear = (A + B) / (2.0 * C)
     return ear
 
 # Inicializa o detector de rosto e o preditor de pontos faciais
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")  # Baixe esse modelo
+predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 
 # Índices dos pontos dos olhos direito e esquerdo
 left_eye_idx = list(range(42, 48))
@@ -33,8 +37,8 @@ cap = cv2.VideoCapture(0)
 
 # Parâmetros de detecção
 EAR_THRESHOLD = 0.25         # Limite para considerar olho fechado
-EAR_CONSEC_FRAMES = 20       # Quantidade de frames consecutivos para alerta
-SLEEP_FRAMES = 48            # Quantidade de frames consecutivos para alarme
+EAR_CONSEC_FRAMES = 20       # Frames para alerta
+SLEEP_FRAMES = 48            # Frames para alarme
 
 frame_counter = 0
 
@@ -51,32 +55,29 @@ while True:
     for face in faces:
         landmarks = predictor(gray, face)
 
-        # Coordenadas dos olhos
         left_eye = np.array([(landmarks.part(i).x, landmarks.part(i).y) for i in left_eye_idx])
         right_eye = np.array([(landmarks.part(i).x, landmarks.part(i).y) for i in right_eye_idx])
 
-        # Cálculo do EAR
         left_ear = eye_aspect_ratio(left_eye)
         right_ear = eye_aspect_ratio(right_eye)
         ear = (left_ear + right_ear) / 2.0
 
-        # Verificação de sonolência
         if ear < EAR_THRESHOLD:
             frame_counter += 1
 
             if EAR_CONSEC_FRAMES < frame_counter < SLEEP_FRAMES:
-                cv2.putText(frame, "ALERTA: Sonolência detectada!", (10, 30),
+                cv2.putText(frame, "ALERTA: Sonolencia detectada!", (10, 30),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
-                play_sound("alerta1.mp3")  # Som leve de alerta
+                play_sound("alerta1.wav")  # Som leve de alerta
 
             elif frame_counter >= SLEEP_FRAMES:
                 cv2.putText(frame, "ALARME: Motorista dormindo!", (10, 30),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
-                play_sound("alerta2.mp3")  # Alarme forte
+                play_sound("alerta2.wav")  # Alarme forte
         else:
-            frame_counter = 0  # Reseta o contador se os olhos estiverem abertos
+            frame_counter = 0
 
-        # Desenha os olhos
+        # Desenha os contornos dos olhos
         cv2.polylines(frame, [left_eye], True, (0, 255, 0), 1)
         cv2.polylines(frame, [right_eye], True, (0, 255, 0), 1)
 
