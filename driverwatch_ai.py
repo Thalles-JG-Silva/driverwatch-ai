@@ -41,6 +41,7 @@ EAR_CONSEC_FRAMES = 20       # Frames para alerta
 SLEEP_FRAMES = 48            # Frames para alarme
 
 frame_counter = 0
+alert_state = "normal"       # Estados: normal, alerta, alarme
 
 print("DriverWatch-AI iniciado. Pressione 'q' para sair.")
 
@@ -66,16 +67,21 @@ while True:
             frame_counter += 1
 
             if EAR_CONSEC_FRAMES < frame_counter < SLEEP_FRAMES:
-                cv2.putText(frame, "ALERTA: Sonolencia detectada!", (10, 30),
+                cv2.putText(frame, "ALERTA: SONOLENCIA DETECTADA!", (10, 30),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
-                play_sound("alerta1.wav")  # Som leve de alerta
+                if alert_state != "alerta":
+                    play_sound("alerta1.wav")
+                    alert_state = "alerta"
 
             elif frame_counter >= SLEEP_FRAMES:
-                cv2.putText(frame, "ALARME: Motorista dormindo!", (10, 30),
+                cv2.putText(frame, "ALARME: MOTORISTA DORMINDO!", (10, 30),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
-                play_sound("alerta2.wav")  # Alarme forte
+                if alert_state != "alarme":
+                    play_sound("alerta2.wav")
+                    alert_state = "alarme"
         else:
             frame_counter = 0
+            alert_state = "normal"
 
         # Desenha os contornos dos olhos
         cv2.polylines(frame, [left_eye], True, (0, 255, 0), 1)
