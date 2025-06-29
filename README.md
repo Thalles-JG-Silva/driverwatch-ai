@@ -61,8 +61,12 @@ python driverwatch_ai.py
 
 ---
 
-### Passo a Passo
+### Resultado
 
+O vídeo abaixo demonstra os diferentes níveis de alerta emitidos ao motorista. 
+A altura e o ritmo do alarme aumentam gradualmente conforme o tempo em que o motorista permanece com os olhos fechados
+
+---
 ## 📝 Observações
 
 - O sistema é apenas uma demonstração e não substitui ferramentas profissionais de segurança veicular.
