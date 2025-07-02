@@ -78,7 +78,8 @@ while True:
                             cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
                 if alert_state != "alarme":
                     play_sound("alerta2.wav")
-                    alert_state = "alarme"
+            
+                alert_state = "alarme"
         else:
             frame_counter = 0
             alert_state = "normal"
